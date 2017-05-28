@@ -12,6 +12,6 @@ Void Package Notifier Daemon (vpnd)
 
 Simple notifier for Void Linux package updates.
 
-* Install by running ./vpnd-installer
+* Install by running `./vpnd-installer`
 
-* Run by issuing command "vpnd &" (ideally added to .xinitrc or similar)
+* Run by issuing command `vpnd &` (ideally added to .xinitrc or similar)
