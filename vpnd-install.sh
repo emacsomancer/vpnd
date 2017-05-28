@@ -33,5 +33,5 @@ sudo cp abgrund.png /usr/local/share/icons/vpnd/abgrund.png
 sudo cp ungeheuern.png /usr/local/share/icons/vpnd/ungeheuern.png
 
 # copy bash shell script & make +x
-sudo cp vpnd.sh /usr/local/bin/vpnd.sh
-sudo chmod +x /usr/local/bin/vpnd.sh
+sudo cp vpnd.sh /usr/local/bin/vpnd
+sudo chmod +x /usr/local/bin/vpnd
