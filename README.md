@@ -10,9 +10,10 @@ Void Package Notifier Daemon (vpnd)
                 (with apologies to F. Nietzsche)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Simple notifier for Void Linux package updates. 
-Void stares into your soul when packages need updating.
-Mouse-over on icon reveals specifics of required updates.
+- Simple notifier for Void Linux package updates. 
+- Void stares into your soul when packages need updating.
+- Mouse-over on icon reveals specifics of required updates.
+- Left click on icon forces recheck (autochecks every 30 minutes).
 
 ![void screenshot](https://github.com/emacsomancer/vpnd/blob/master/screenshot.png)
 
