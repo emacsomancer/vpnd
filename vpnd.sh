@@ -51,7 +51,7 @@ exec 3<> $PIPE
 # define function for yad to call on left-click, forcing check updates
 function updater {
 	# enumerate packages needing updating, export to tmp file 
-        /usr/bin/xbps-install -Mun | xbps-install -Mun | sed -r 's/(\w+) (\w+)/\1 [\2]/' | awk '{print $1,$2}' | column -t > /tmp/void-pkgs
+        /usr/bin/xbps-install -Mun | sed -r 's/(\w+) (\w+)/\1 [\2]/' | awk '{print $1,$2}' | column -t  > /tmp/void-pkgs
         # count packages needing updating
         n=`cat /tmp/void-pkgs | /usr/bin/wc -l`
 	# set last checked timestamp
