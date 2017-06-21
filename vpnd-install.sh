@@ -24,8 +24,11 @@
     # You should have received a copy of the GNU General Public License along with this
     # program. If not, see http://www.gnu.org/licenses/.
 
-# install yad - http://sourceforge.net/projects/yad-dialog/
-sudo xbps-install -Su yad 
+# install yad - http://sourceforge.net/projects/yad-dialog/ - if not already installed
+if ! xbps-query -s yad >/dev/null 2>&1   
+ then 
+         /usr/bin/sudo xbps-install -Su yad
+ fi
 
 # copy icons
 sudo mkdir -p /usr/local/share/icons/vpnd/
