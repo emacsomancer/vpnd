@@ -50,8 +50,22 @@ exec 3<> $PIPE
 
 # define function for yad to call on left-click, forcing check updates
 function updater {
-	# enumerate packages needing updating, export to tmp file 
-        /usr/bin/xbps-install -Mun | sed -r 's/(\w+) (\w+)/\1 [\2]/' | awk '{print $1,$2}' | column -t  > /tmp/void-pkgs
+        # Check if error (2>&1 redirects stderr>stdout)
+        /usr/bin/xbps-install -Munv 2>&1 | grep MISSING > /tmp/void-errs
+        # if non-null then errors
+	en=`cat /tmp/void-errs | /usr/bin/wc -l`
+	if [ $en -eq 0 ] # no error
+	then
+	   pkginfo="" # blank pkginfo
+        else # error
+	    pkginfo="!!!!ERROR!!!!\n"
+	    pkginfo="$pkginfo $(</tmp/void-errs)" # stored error message in pkginfo
+	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * \n"
+	fi
+        # Cut out relevant info from all lines with "Found"
+        /usr/bin/xbps-install -Munv 2>&1 |grep Found | cut -d' ' -f2-3 | column -t > /tmp/void-pkgs
+	# OLD comment: enumerate packages needing updating, export to tmp file 
+        # OLD: /usr/bin/xbps-install -Mun | sed -r 's/(\w+) (\w+)/\1 [\2]/' | awk '{print $1,$2}' | column -t  > /tmp/void-pkgs
         # count packages needing updating
         n=`cat /tmp/void-pkgs | /usr/bin/wc -l`
 	# set last checked timestamp
@@ -61,18 +75,22 @@ function updater {
         done < /tmp/void-pkgs
 	if [ $n -eq 0 ] # no new pkgs
 	then
-		pkginfo="all packages up-to-date \n------------------------------------------------------- \n [$d]"
+		pkginfo="$pkginfo all packages up-to-date \n------------------------------------------------------- \n [$d]"
 		exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/abgrund.png"
 	elif [ $n -eq 1 ] # 1 new pkg
 	then
-	    	pkginfo="$n package needs updating: \n================================== $pkgs \n------------------------------------------------------------------ \n [$d]"
+	    	pkginfo="$pkginfo $n package needs updating: \n================================== $pkgs \n------------------------------------------------------------------ \n [$d]"
 		exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
         else # >1 new pkgs
-	    	pkginfo="$n packages need updating:  \n================================== $pkgs \n----------------------------------------------------------------- \n [$d]"
+	    	pkginfo="$pkginfo $n packages need updating:  \n================================== $pkgs \n----------------------------------------------------------------- \n [$d]"
 	    	exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
+	fi
+	if [ $n -ne 0 ]
+	then
+	    echo "icon:/usr/local/share/icons/vpnd/ungeheuern-krank.png"
 	fi
 	echo "tooltip:$pkginfo" # set mouse-over to relevant pkginfo
 }

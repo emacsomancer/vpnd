@@ -26,14 +26,15 @@
 
 # install yad - http://sourceforge.net/projects/yad-dialog/ - if not already installed
 if ! xbps-query -s yad >/dev/null 2>&1   
- then 
-         /usr/bin/sudo xbps-install -Su yad
- fi
+then 
+    /usr/bin/sudo xbps-install -Su yad
+fi	
 
 # copy icons
 sudo mkdir -p /usr/local/share/icons/vpnd/
 sudo cp abgrund.png /usr/local/share/icons/vpnd/abgrund.png
 sudo cp ungeheuern.png /usr/local/share/icons/vpnd/ungeheuern.png
+sudo cp ungeheuern-krank.png /usr/local/share/icons/vpnd/ungeheuern-krank.png
 
 # copy bash shell script & make +x
 sudo cp vpnd.sh /usr/local/bin/vpnd
