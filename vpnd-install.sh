@@ -25,7 +25,7 @@
     # program. If not, see http://www.gnu.org/licenses/.
 
 # install yad - http://sourceforge.net/projects/yad-dialog/ - if not already installed
-if ! xbps-query -s yad >/dev/null 2>&1   
+if ! [ xbps-query -s yad >/dev/null 2>&1 ]
 then 
     /usr/bin/sudo xbps-install -Su yad
 fi	
