@@ -20,3 +20,5 @@ Void Package Notifier Daemon (vpnd)
 * Install by running `./vpnd-installer`
 
 * Run by issuing command `vpnd &` (ideally added to .xinitrc or similar)
+
+![new error message screenshot](https://github.com/emacsomancer/vpnd/blob/master/screenshot-error.png)
