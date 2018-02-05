@@ -21,4 +21,6 @@ Void Package Notifier Daemon (vpnd)
 
 * Run by issuing command `vpnd &` (ideally added to .xinitrc or similar)
 
+* Update: now detects errors, and checks reverse dependencies of problematic packages:
+
 ![new error message screenshot](https://github.com/emacsomancer/vpnd/blob/master/screenshot-error.png)
