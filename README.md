@@ -24,3 +24,5 @@ Void Package Notifier Daemon (vpnd)
 * Update: now detects errors, and checks reverse dependencies of problematic packages:
 
 ![new error message screenshot](https://github.com/emacsomancer/vpnd/blob/master/screenshot-error.png)
+
+Also available, `xbps-update-all-possible`, updates all non-broken packages.
