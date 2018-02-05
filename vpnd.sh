@@ -58,9 +58,13 @@ function updater {
 	then
 	   pkginfo="" # blank pkginfo
         else # error
-	    pkginfo="!!!!ERROR!!!!\n"
-	    pkginfo="$pkginfo $(</tmp/void-errs)" # stored error message in pkginfo
-	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * \n"
+    	    pkginfo="!!!!ERROR!!!!\n"
+	    while read line; do  # check each problematic pkg
+		echo $line > /tmp/tmpline  # strip out each line about problem pkgs to tmp file /tmp/tmpline
+		problem=$(cut -d' ' -f2- /tmp/tmpline | sed 's/[<>=].*//') # narrow to pkg-name in /tmp/tmpline, store in $problem
+		pkginfo="$pkginfo $line \n     required by: $(/usr/bin/xbps-query -X $problem)" # check what packages require problem pkg with xbps-query -X
+	    done < /tmp/void-errs
+	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
 	fi
         # Cut out relevant info from all lines with "Found"
         /usr/bin/xbps-install -Munv 2>&1 |grep Found | cut -d' ' -f2-3 | column -t > /tmp/void-pkgs
