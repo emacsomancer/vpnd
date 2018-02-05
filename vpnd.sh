@@ -92,7 +92,7 @@ function updater {
 	    	exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
 	fi
-	if [ $n -ne 0 ]
+	if [ $en -ne 0 ]
 	then
 	    echo "icon:/usr/local/share/icons/vpnd/ungeheuern-krank.png"
 	fi
