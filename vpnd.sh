@@ -52,6 +52,7 @@ exec 3<> $PIPE
 function updater {
         # Check if error (2>&1 redirects stderr>stdout)
         /usr/bin/xbps-install -Munv 2>&1 | grep MISSING > /tmp/void-errs
+        /usr/bin/xbps-install -Munv 2>&1 | grep breaks > /tmp/void-breaks
         # if non-null then errors
 	en=`cat /tmp/void-errs | /usr/bin/wc -l`
 	if [ $en -eq 0 ] # no error
@@ -64,12 +65,18 @@ function updater {
 		problem=$(cut -d' ' -f2- /tmp/tmpline | sed 's/[<>=].*//') # narrow to pkg-name in /tmp/tmpline, store in $problem
 		pkginfo="$pkginfo $line \n     required by: $(/usr/bin/xbps-query -X $problem)" # check what packages require problem pkg with xbps-query -X
 	    done < /tmp/void-errs
-	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+    	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
+	fi
+	eb=`cat /tmp/void-breaks | /usr/bin/wc -l`
+	if [ $eb -ne 0 ] # breaking errors
+	   then
+	       while read line; do # list all breaking packages
+		   pkginfo="$pkginfo $line \n"
+	       done < /tmp/void-breaks
+	       pkginfo="$pkginfo # # # # # # # # # # # # # # # # # # # # # # # # # # # #\n"
 	fi
         # Cut out relevant info from all lines with "Found"
         /usr/bin/xbps-install -Munv 2>&1 |grep Found | cut -d' ' -f2-3 | column -t > /tmp/void-pkgs
-	# OLD comment: enumerate packages needing updating, export to tmp file 
-        # OLD: /usr/bin/xbps-install -Mun | sed -r 's/(\w+) (\w+)/\1 [\2]/' | awk '{print $1,$2}' | column -t  > /tmp/void-pkgs
         # count packages needing updating
         n=`cat /tmp/void-pkgs | /usr/bin/wc -l`
 	# set last checked timestamp
