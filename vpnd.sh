@@ -86,16 +86,16 @@ function updater {
         done < /tmp/void-pkgs
 	if [ $n -eq 0 ] # no new pkgs
 	then
-		pkginfo="$pkginfo all packages up-to-date \n------------------------------------------------------- \n [$d]"
+		pkginfo="$pkginfo \n all packages up-to-date \n------------------------------------------------------- \n [$d]"
 		exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/abgrund.png"
 	elif [ $n -eq 1 ] # 1 new pkg
 	then
-	    	pkginfo="$pkginfo $n package needs updating: \n================================== $pkgs \n------------------------------------------------------------------ \n [$d]"
+	    	pkginfo="$pkginfo \n $n package needs updating: \n================================== $pkgs \n------------------------------------------------------------------ \n [$d]"
 		exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
         else # >1 new pkgs
-	    	pkginfo="$pkginfo $n packages need updating:  \n================================== $pkgs \n----------------------------------------------------------------- \n [$d]"
+	    	pkginfo="$pkginfo \n $n packages need updating:  \n================================== $pkgs \n----------------------------------------------------------------- \n [$d]"
 	    	exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
 	fi
