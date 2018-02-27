@@ -37,7 +37,7 @@ sudo cp ungeheuern.png /usr/local/share/icons/vpnd/ungeheuern.png
 sudo cp ungeheuern-krank.png /usr/local/share/icons/vpnd/ungeheuern-krank.png
 
 # copy bash shell script & make +x
-sudo cp vpnd.sh /usr/local/bin/vpnd
-sudo chmod +x /usr/local/bin/vpnd
-sudo cp xbps-update-all-possible.sh /usr/local/bin/xbps-update-all-possible
-sudo chmod +x /usr/local/bin/xbps-update-all-possible
+sudo cp vpnd.sh /usr/local/bin/vpnd && echo "Installed vpnd"
+sudo chmod +x /usr/local/bin/vpnd && echo "Made vpnd executable"
+sudo cp xbps-update-all-possible.sh /usr/local/bin/xbps-update-all-possible && echo "Installed xbps-update-all-possible"
+sudo chmod +x /usr/local/bin/xbps-update-all-possible && "Made xbps-update-all-possible executable"
