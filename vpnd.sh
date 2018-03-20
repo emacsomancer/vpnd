@@ -59,7 +59,7 @@ function updater {
 	
 	en=`cat /tmp/void-errs | /usr/bin/wc -l`
 	eb=`cat /tmp/void-breaks | /usr/bin/wc -l`
-	if [ [ $en -eq 0 ] && [ $eb -eq 0 ] ] # no error
+	if [[ $en -eq 0 ]] && [[ $eb -eq 0 ]] # no error
 	then
 	   pkginfo="" # blank pkginfo
         else # error
