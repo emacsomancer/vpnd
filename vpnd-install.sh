@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
   # vpnd - Void Package Notifier Daemon installer
 
@@ -25,9 +25,13 @@
     # program. If not, see http://www.gnu.org/licenses/.
 
 # install yad - http://sourceforge.net/projects/yad-dialog/ - if not already installed
-if ! [ xbps-query -s yad >/dev/null 2>&1 ]
+if ! [ xbps-query -s yad >/dev/null 2>&1 ]   # check for yad
 then 
     /usr/bin/sudo xbps-install -Su yad
+fi
+if ! [ xbps-query -s bash >/dev/null 2>&1 ]  # check for bash
+then 
+    /usr/bin/sudo xbps-install -Su bash
 fi	
 
 # copy icons

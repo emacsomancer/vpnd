@@ -53,9 +53,13 @@ function updater {
         # Check if error (2>&1 redirects stderr>stdout)
         /usr/bin/xbps-install -Munv 2>&1 | grep MISSING > /tmp/void-errs
         /usr/bin/xbps-install -Munv 2>&1 | grep breaks > /tmp/void-breaks
+	/usr/bin/xbps-install -Munv 1>/dev/null 2>/tmp/stderr
+        grep broken /tmp/stderr >> /tmp/void-breaks
         # if non-null then errors
+	
 	en=`cat /tmp/void-errs | /usr/bin/wc -l`
-	if [ $en -eq 0 ] # no error
+	eb=`cat /tmp/void-breaks | /usr/bin/wc -l`
+	if [ [ $en -eq 0 ] && [ $eb -eq 0 ] ] # no error
 	then
 	   pkginfo="" # blank pkginfo
         else # error
@@ -67,7 +71,6 @@ function updater {
 	    done < /tmp/void-errs
     	    pkginfo="$pkginfo \n* * * * * * * * * * * * * * * * * * * * * * * * * * * *\n"
 	fi
-	eb=`cat /tmp/void-breaks | /usr/bin/wc -l`
 	if [ $eb -ne 0 ] # breaking errors
 	   then
 	       while read line; do # list all breaking packages
@@ -99,7 +102,7 @@ function updater {
 	    	exec 3<> $PIPE >&3
 		echo "icon:/usr/local/share/icons/vpnd/ungeheuern.png"
 	fi
-	if [ $en -ne 0 ]
+	if [ $en -ne 0 ] || [ $eb -ne 0 ]
 	then
 	    echo "icon:/usr/local/share/icons/vpnd/ungeheuern-krank.png"
 	fi
