@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
   # vpnd - Void Package Notifier Daemon installer
 
