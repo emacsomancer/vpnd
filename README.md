@@ -1,6 +1,10 @@
 # vpnd
 Void Package Notifier Daemon (vpnd)
 
+# Development continues at Gitlab
+Goto: https://gitlab.com/emacsomancer/vpnd
+
+
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  "He who fights against (certain kinds of) daemons should beware lest
  he himself becomes a daemon. And when you gaze long into the Void,
